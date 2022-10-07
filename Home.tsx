@@ -9,7 +9,7 @@ const { useLayoutEffect, useState } = React;
 
 const Home = ({ navigation }: any) => {
     const { useState, useRef } = React;
-    const [ id, setid] = useState("")
+    const [ astroidId, setastroidId] = useState("")
     const [items, setItems] = useState([]);
     const [error, seterror] = useState(false);
     const [Detail, setDetail] = useState({
@@ -60,11 +60,11 @@ const Home = ({ navigation }: any) => {
     const errorRef = useRef(false)
 
     const handleButton = () => {
-        navigation.push('Details', {id})
+        navigation.push('Details', {astroidId})
     }
 
     const handleButton1 = () => {
-        navigation.push('Random', {input})
+        navigation.push('Random', {astroidId})
     }
 
     const handleChange = (value:any) => {
@@ -76,7 +76,7 @@ const Home = ({ navigation }: any) => {
             setMinValueError(false)
             errorRef.current = false;
         }
-        setid(value)
+        setastroidId(value)
     }
       console.log(items);
     return (
@@ -85,12 +85,12 @@ const Home = ({ navigation }: any) => {
         <View style={styles.Container}>
         <TextInput
         label="Enter Astroid ID"
-        value={id}
+        value={astroidId}
         onChangeText={handleChange}
         mode="outlined"
         />
         <Button style={{
-                backgroundColor: !(id) ? "#D2D3D9" : "#1996FC",marginTop:50, 
+                backgroundColor: !(astroidId) ? "#D2D3D9" : "#1996FC",marginTop:50, 
                 borderRadius:5, 
                 width:180, 
                 justifyContent: "center", 

@@ -3,13 +3,13 @@ import {Text, SafeAreaView,StyleSheet } from "react-native";
 import axios from "axios";
 
 const Details = ({route, navigation}:any) =>{
-    const {id}= route.params
+    const {astroidId}= route.params
     const { useLayoutEffect, useState } = React;
     const [error, seterror] = useState(false);
     const [random_id, setrandom_id] = useState('')
     
     const [Detail, setDetail] = useState({
-        "id":"", "name" :"", "nasa_jpl_url":"https://" , "is_potentially_hazardous_asteroid":""
+        "id":"", "name" :"", "nasa_jpl_url":"https://" , "is_potentially_hazardous_asteroid":"",
     })
     
     // const API_KEY = "Iz4FgVENHz381dTWsgmNr0LcSF3NgdI2Uuyie9OZ";
@@ -46,17 +46,37 @@ const Details = ({route, navigation}:any) =>{
     //     }
     //     fetchData();
     //   }, []);
+
+    // const Astroid_data = async () => {
+    //     console.log('Astroid_data')
+    //     const response = await fetch  (`https://api.nasa.gov/neo/rest/v1/neo/${astroidId}?api_key=b6VIvVEtwrIksMntZVFNG3DptETMKJzALjvZ5djH`);
+    //     const jsonData = await response.json()
+    //     setDetail(jsonData.Detail)
+    //   };
+    //   useEffect(() => {
+    //     Astroid_data()
+    //     console.log('data', Astroid_data)
+    //   }, []);
+    // 
+    
     useLayoutEffect(() => {
-        axios.get(`https://api.nasa.gov/neo/rest/v1/neo/${id}?api_key=b6VIvVEtwrIksMntZVFNG3DptETMKJzALjvZ5djH`)
-            .then((response) => {
-                console.log(response.data)
-                setDetail(response.data)
-            })
-            .catch((error) => {
-                seterror(true)
-            })
-    }, 
-    [])
+                axios.get(`https://api.nasa.gov/neo/rest/v1/neo/${astroidId}?api_key=b6VIvVEtwrIksMntZVFNG3DptETMKJzALjvZ5djH`)
+                    .then((response) => {
+                        console.log(response.data)
+                        setDetail(response.data)
+                    })
+                    .catch((error) => {
+                        if(axios.isAxiosError(error)){
+                            console.log("ERROR:check axios:", error.message);
+                            return '404';
+                        }else{
+                            console.log("ERROR: something else", error);
+                            return "404"
+                        }
+                    })
+            }, 
+            [])
+        
     return (
         <SafeAreaView style={styles.Container}>
         <Text style={styles.title}>About Asteroid</Text>
