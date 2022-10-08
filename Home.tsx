@@ -2,9 +2,11 @@ import * as  React from "react";
 import { 
     View,
     StyleSheet,
-    Text } from "react-native";
+    Text,
+ImageBackground } from "react-native";
 import { TextInput, Button} from 'react-native-paper';
 import axios from "axios";
+const bg = require('./assets/first.jpg')
 const { useLayoutEffect, useState } = React;
 
 const Home = ({ navigation }: any) => {
@@ -81,6 +83,7 @@ const Home = ({ navigation }: any) => {
       console.log(items);
     return (
         <>
+        <ImageBackground source={bg} resizeMode='cover' style={styles.bgStyle} >
         <Text style={styles.title}>NASA App</Text>
         <View style={styles.Container}>
         <TextInput
@@ -102,6 +105,7 @@ const Home = ({ navigation }: any) => {
         Random Astroid
         </Button>
         </View>
+        </ImageBackground>
         </>
     );
 };
@@ -124,6 +128,13 @@ const styles = StyleSheet.create({
         justifyContent: "center", 
         width: "60%", 
         alignSelf: "center"
-    }
+    },
+    bgStyle: {
+        flex: 1,
+        justifyContent: "center",
+        // paddingHorizontal: 30,
+        height: "100%",
+        width:"100%"
+    },
   });
 export default Home;

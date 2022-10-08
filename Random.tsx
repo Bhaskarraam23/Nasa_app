@@ -82,7 +82,7 @@ const Details = ({route, navigation}:any) =>{
             .then((response) => {
                 const dict = response.data.near_earth_objects;
                 const randomAstroid = dict[Math.floor(Math.random()*dict.length)]
-                console.log(randomAstroid)
+                // console.log(randomAstroid)
                 setDetail(randomAstroid)
             })
             .catch((error) => {
@@ -96,13 +96,14 @@ const Details = ({route, navigation}:any) =>{
             })
     }, 
     [])
-    console.log()
+    // console.log()
     let isValid = Detail?.is_potentially_hazardous_asteroid;
     let m = isValid.toString();
         
     return (
-        // <View>
-        // <ImageBackground source={bg} resizeMode='cover' style={styles.bgStyle} >
+        
+        <ImageBackground source={bg} resizeMode='cover' style={styles.bgStyle} >
+            {/* <View> */}
         <SafeAreaView style={styles.Container}>
         <Text style={styles.title}>About Asteroid</Text>
         <Text style={{fontSize:20,padding:15,marginTop:20,}}>ID : {Detail?.id}</Text>
@@ -110,8 +111,9 @@ const Details = ({route, navigation}:any) =>{
         <Text style={{fontSize:20,padding:15}}>NASA JPL URL : {Detail?.nasa_jpl_url}</Text>
         <Text style={{fontSize:20,padding:15}}>Is Potentially Hazardous Asteroid: {m}</Text>
          </SafeAreaView>
-        //  </ImageBackground>
-        // </View>
+         {/* </View> */}
+          </ImageBackground>
+         
         
        
     );
@@ -132,8 +134,9 @@ const styles = StyleSheet.create({
     bgStyle: {
         flex: 1,
         justifyContent: "center",
-        paddingHorizontal: 30,
-        height: 300
+        // paddingHorizontal: 30,
+        height: "100%",
+        width:"100%"
     },
 
 
