@@ -1,15 +1,16 @@
 import * as React from "react";
-import {Text, SafeAreaView,StyleSheet } from "react-native";
+import {Text, SafeAreaView,StyleSheet, View, ImageBackground } from "react-native";
 import axios from "axios";
+const bg = require('../my-app/assets/nasa.png')
+
 
 const Details = ({route, navigation}:any) =>{
     const {astroidId}= route.params
     const { useLayoutEffect, useState } = React;
     const [error, seterror] = useState(false);
     const [random_id, setrandom_id] = useState('')
-    
     const [Detail, setDetail] = useState({
-        "id":"", "name" :"", "nasa_jpl_url":"https://" , "is_potentially_hazardous_asteroid":"",
+        "id":"", "name" :"", "nasa_jpl_url":"https://" , "is_potentially_hazardous_asteroid": "",
     })
 
     
@@ -79,8 +80,8 @@ const Details = ({route, navigation}:any) =>{
     useLayoutEffect(() => {
         axios.get(`https://api.nasa.gov/neo/rest/v1/neo/browse?api_key=b6VIvVEtwrIksMntZVFNG3DptETMKJzALjvZ5djH`)
             .then((response) => {
-                const arrofAstroid = response.data.near_earth_objects;
-                const randomAstroid = arrofAstroid[Math.floor(Math.random()*arrofAstroid.length)]
+                const dict = response.data.near_earth_objects;
+                const randomAstroid = dict[Math.floor(Math.random()*dict.length)]
                 console.log(randomAstroid)
                 setDetail(randomAstroid)
             })
@@ -95,15 +96,24 @@ const Details = ({route, navigation}:any) =>{
             })
     }, 
     [])
+    console.log()
+    let isValid = Detail?.is_potentially_hazardous_asteroid;
+    let m = isValid.toString();
         
     return (
+        <View>
+        <ImageBackground source={bg} resizeMode='cover' style={styles.bgStyle} >
         <SafeAreaView style={styles.Container}>
         <Text style={styles.title}>About Asteroid</Text>
         <Text style={{fontSize:20,padding:15,marginTop:20,}}>ID : {Detail?.id}</Text>
         <Text style={{fontSize:20,padding:15}}>Name : {Detail?.name}</Text>
         <Text style={{fontSize:20,padding:15}}>NASA JPL URL : {Detail?.nasa_jpl_url}</Text>
-        <Text style={{fontSize:20,padding:15}}>Is Potentially Hazardous Asteroid: {Detail?.is_potentially_hazardous_asteroid}</Text>
-        </SafeAreaView>
+        <Text style={{fontSize:20,padding:15}}>Is Potentially Hazardous Asteroid: {m}</Text>
+         </SafeAreaView>
+         </ImageBackground>
+        </View>
+        
+       
     );
 };
 const styles = StyleSheet.create({
@@ -118,7 +128,13 @@ const styles = StyleSheet.create({
         alignSelf: "center", 
         color:"black"
         
-    }
+    },
+    bgStyle: {
+        flex: 1,
+        justifyContent: "center",
+        paddingHorizontal: 30,
+        height: 300
+    },
 
 
 });
