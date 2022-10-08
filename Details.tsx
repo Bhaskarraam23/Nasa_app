@@ -85,8 +85,8 @@ const Details = ({route, navigation}:any) =>{
             
         
     return (
-        <View>
-        <ImageBackground source={bg} resizeMode='cover' style={styles.bgStyle} >
+        // <View>
+        // <ImageBackground source={bg} resizeMode='cover' style={styles.bgStyle} >
         <SafeAreaView style={styles.Container}>
         <Text style={styles.title}>About Asteroid</Text>
         <Text style={{fontSize:20,padding:15,marginTop:20,}}>ID : {Detail?.id}</Text>
@@ -94,8 +94,8 @@ const Details = ({route, navigation}:any) =>{
         <Text style={{fontSize:20,padding:15}}>NASA JPL URL : {Detail?.nasa_jpl_url}</Text>
         <Text style={{fontSize:20,padding:15}}>Is Potentially Hazardous Asteroid: {m}</Text>
         </SafeAreaView>
-        </ImageBackground>
-        </View>
+        // </ImageBackground>
+        // </View>
     );
 };
 const styles = StyleSheet.create({
