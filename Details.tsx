@@ -104,7 +104,8 @@ const styles = StyleSheet.create({
     Container:{
         flex: 1, 
         width: "90%", 
-        alignSelf: "center"
+        alignSelf: "center",
+        color:"blue",
     },
     title:{
         fontWeight:"bold", 

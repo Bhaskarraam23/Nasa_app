@@ -80,10 +80,18 @@ const Details = ({route, navigation}:any) =>{
     useLayoutEffect(() => {
         axios.get(`https://api.nasa.gov/neo/rest/v1/neo/browse?api_key=b6VIvVEtwrIksMntZVFNG3DptETMKJzALjvZ5djH`)
             .then((response) => {
+                
+                // // console.log(randomAstroid)
+                // // @ts-ignore
+                // const arrayOfID = response["near_earth_objects"];
+
+                //  // @ts-ignore
+                // const allAsteroidID = arrayOfID.map(obj => obj.id)
+                // const randomIdx = Math.floor(Math.random() * allAsteroidID.length)
+                // const RANDOM_ASTROID_ID = allAsteroidID[randomIdx];
                 const dict = response.data.near_earth_objects;
-                const randomAstroid = dict[Math.floor(Math.random()*dict.length)]
-                // console.log(randomAstroid)
-                setDetail(randomAstroid)
+                const RANDOM_ASTROID_ID = dict[Math.floor(Math.random()*dict.length)]
+                setDetail(RANDOM_ASTROID_ID)
             })
             .catch((error) => {
                 if(axios.isAxiosError(error)){
